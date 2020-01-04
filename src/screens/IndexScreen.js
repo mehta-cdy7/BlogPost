@@ -3,17 +3,14 @@ import { View, StyleSheet, Text, FlatList, Button, TouchableOpacity } from "reac
 import { Context } from "../context/BlogContext";
 import { Entypo, Feather } from "@expo/vector-icons";
 
-
 const IndexScreen = ({ navigation }) => {
 
 
     const { state, addBlogPost, deleteBlogPost } = useContext(Context);
-
+     
 
     return <View>
-        <Button
-            title='ADD POST'
-            onPress={addBlogPost}></Button>
+    
         <FlatList
             data={state}
             keyExtractor={(blogpost) => blogpost.title}
@@ -26,11 +23,13 @@ const IndexScreen = ({ navigation }) => {
                                 style={styles.text}>
                                 {item.title} - {item.id}
                             </Text>
+
                             <TouchableOpacity onPress={() => deleteBlogPost(item.id)}>
                                 <Entypo
                                     name='trash'
                                     style={styles.icon}
                                 />
+
                             </TouchableOpacity>
 
                         </View>
