@@ -6,22 +6,30 @@ const ShowScreen = ({ navigation }) => {
 
     const { state } = useContext(Context);
 
-    const blogPost = state.find((blogpost) => { blogpost.id === navigation.getParam('id')})
-    /* const title = navigation.getParam("title");
-    const id = navigation.getParam("id"); */
+    const id = navigation.getParam('id');
+    const blogpost = state.find((item) => item.id === id);
 
-    return (<View>
+    return (<View style = {styles.container}>
         <Text style={styles.title}>Title :</Text>
         <View style={styles.content}>
-            <Text >{blogPost.title}</Text>
+            <Text >{blogpost.title}</Text>
+        </View>
+        <Text style={styles.title}>Content :</Text>
+        <View style={styles.content}>
+            <Text >{blogpost.content}</Text>
         </View>
     </View>);
 }
 
 const styles = StyleSheet.create({
+    container: {
+        padding: 10,
+        margin: 10,
+    },
     title: {
         fontSize: 20,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        padding  :5 , 
     }
     ,
     content: {
@@ -29,6 +37,7 @@ const styles = StyleSheet.create({
         borderRadius: 2,
         borderColor: 'black',
         borderWidth: 1,
+        padding : 5 ,
     }
 });
 
