@@ -6,11 +6,11 @@ import { Entypo, Feather } from "@expo/vector-icons";
 const IndexScreen = ({ navigation }) => {
 
 
-    const { state, addBlogPost, deleteBlogPost } = useContext(Context);
+    const { state  , deleteBlogPost } = useContext(Context);
      
 
     return <View>
-    
+       
         <FlatList
             data={state}
             keyExtractor={(blogpost) => blogpost.title}

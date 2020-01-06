@@ -1,6 +1,8 @@
 import React, { useContext } from "react";
-import { View, StyleSheet, Text } from "react-native";
+import { View, StyleSheet, Text , TouchableOpacity } from "react-native";
 import { Context } from "../context/BlogContext";
+import {AntDesign} from "@expo/vector-icons";
+
 
 const ShowScreen = ({ navigation }) => {
 
@@ -9,7 +11,7 @@ const ShowScreen = ({ navigation }) => {
     const id = navigation.getParam('id');
     const blogpost = state.find((item) => item.id === id);
 
-    return (<View style = {styles.container}>
+    return (<View style={styles.container}>
         <Text style={styles.title}>Title :</Text>
         <View style={styles.content}>
             <Text >{blogpost.title}</Text>
@@ -21,23 +23,31 @@ const ShowScreen = ({ navigation }) => {
     </View>);
 }
 
+ShowScreen.navigationOptions = ({ navigation }) => {
+return {
+    headerRight  :<TouchableOpacity onPress = {()=>navigation.navigate('Edit' , {id: id })}>
+         <AntDesign name = "edit" size ={20} ></AntDesign>
+    </TouchableOpacity>
+}
+};
+
 const styles = StyleSheet.create({
     container: {
         padding: 10,
         margin: 10,
+        borderRadius: 2,
+        borderColor: 'black',
+        borderWidth: 1,
     },
     title: {
         fontSize: 20,
-        fontWeight: 'bold',
-        padding  :5 , 
+        fontWeight: 'bold', 
+        padding: 5,
     }
     ,
     content: {
         fontSize: 16,
-        borderRadius: 2,
-        borderColor: 'black',
-        borderWidth: 1,
-        padding : 5 ,
+        padding: 5,
     }
 });
 
