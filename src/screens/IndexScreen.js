@@ -1,16 +1,40 @@
-import React, { useContext } from "react";
-import { View, StyleSheet, Text, FlatList, Button, TouchableOpacity } from "react-native";
+import React, { useContext, useEffect } from "react";
+import {
+    View,
+    StyleSheet,
+    Text,
+    FlatList,
+    Button,
+    TouchableOpacity
+} from "react-native";
 import { Context } from "../context/BlogContext";
 import { Entypo, Feather } from "@expo/vector-icons";
 
 const IndexScreen = ({ navigation }) => {
 
 
-    const { state  , deleteBlogPost } = useContext(Context);
-     
+    const { state, deleteBlogPost, getBlogPost } = useContext(Context);
+
+    useEffect(() => {
+        getBlogPost()
+        
+        // if index screen is opened again this function will work then 
+        const listener = navigation.addListener('didFocus' , ()=>{
+              getBlogPost();
+        });
+
+        //in future if we want to un mound our index screen 
+        //we will remove the listener to prevent memory_leak
+        return ()=>{
+            listener.remove();
+        }
+        
+    }, []);
+
+    getBlogPost()
 
     return <View>
-       
+
         <FlatList
             data={state}
             keyExtractor={(blogpost) => blogpost.title}
@@ -41,9 +65,9 @@ const IndexScreen = ({ navigation }) => {
 
 }
 
-IndexScreen.navigationOptions = ({navigation}) => {
+IndexScreen.navigationOptions = ({ navigation }) => {
     return {
-        headerRight: <TouchableOpacity onPress = { () => navigation.navigate('Create')}>
+        headerRight: <TouchableOpacity onPress={() => navigation.navigate('Create')}>
             <Feather name='plus' size={20} />
         </TouchableOpacity>
     };

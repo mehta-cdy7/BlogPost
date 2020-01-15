@@ -23,9 +23,9 @@ const ShowScreen = ({ navigation }) => {
     </View>);
 }
 
-ShowScreen.navigationOptions = ({ navigation }) => {
+ShowScreen.navigationOptions = ({  }) => {
 return {
-    headerRight  :<TouchableOpacity onPress = {()=>navigation.navigate('Edit' , {id: id })}>
+    headerRight  :<TouchableOpacity onPress = {()=>navigation.navigate('Edit' , {id})}>
          <AntDesign name = "edit" size ={20} ></AntDesign>
     </TouchableOpacity>
 }
